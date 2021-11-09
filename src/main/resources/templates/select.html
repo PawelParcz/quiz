@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+   <meta charset="utf-8"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+   <meta name="description" content="project +"/>
+   <meta name="author" content="Paweł Parcz"/>
+   <title>Quiz Application</title>
+   <!--        <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" />-->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+   <div class="container px-4">
+      <a class="navbar-brand js-scroll-trigger" th:href="@{/}">Quiz Application - pick options</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+              aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
+              class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+         <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+         </ul>
+      </div>
+   </div>
+</nav>
+
+<br>
+<hr>
+<!-- About section-->
+<div class="container">
+   <section id="option">
+      <div class="container px-4">
+         <div class="row gx-4 justify-content-center">
+            <div class="col-lg-8">
+               <form method="post"  th:action="@{/select}" th:object="${gameOptions}" >
+                  <div class="form-row">
+                     <div class="form-group">
+                        <h4>Questions:</h4>
+                        <label for="numberOfQuestionsInput">Number: </label>
+                        <input class="form-control" name="numberOfQuestionsInput" id="numberOfQuestionsInput"
+                               type="number" th:field="*{numberOfQuestions}" min="1" max="24" step="1"/>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <h4>Difficulty:</h4>
+                     <th:block th:each="difficulty : ${T(pl.sdacademy.projectplus.quiz.frontend.Difficulty).values()}">
+                        <div class="form-check form-check-inline">
+                           <input class="form-check-input" type="radio" name="difficultyRadioOptions"
+                                  th:id="'difficulty_' + ${difficulty}" th:value="${difficulty}"
+                                  th:field="*{difficulty}">
+                           <label class="form-check-label" th:for="'difficulty_' + ${difficulty}"
+                                  th:text="${difficulty}"></label>
+                        </div>
+                     </th:block>
+                  </div>
+                  <div class="form-row">
+                     <div class="form-group">
+                        <h4>Category:</h4>
+                        <th:block th:each="category : ${categories}">
+                           <div class="form-check">
+                              <input class="form-check-input" type="radio" name="categoryRadioOptions"
+                                     th:id="'category_' + ${category.getId()}" th:value="${category.getId()}"
+                                     th:field="*{categoryId}">
+                              <label class="form-check-label" th:for="'difficulty_' + ${category.getId()}"
+                                     th:text="${category.getName()}">
+                              </label>
+                           </div>
+                        </th:block>
+                     </div>
+                  </div>
+                  <div class="form-row">
+                     <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Play!</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Contact section-->
+   <section id="contact">
+      <div class="container px-4">
+         <div class="row gx-4 justify-content-center">
+            <div class="col-lg-8">
+               <h2>Contact us</h2>
+               <p class="lead">If you'd like to contact page author, feel free to <a href="mailto:pawelparcz@gmail.com">drop
+                  a line</a>!</p>
+            </div>
+         </div>
+      </div>
+   </section>
+</div>
+<!-- Footer-->
+<footer class="py-5 bg-dark container-fluid">
+   <p class="m-0 text-center text-white">Copyright &copy; SDA Java course </p>
+   <span th:text="${#dates.year(#dates.createNow())}"></span>.
+   Template by <a href="https://startbootstrap.com/templates/scrolling-nav/">Start Bootstrap</a></p>
+</footer>
+
+<!--        <script src="../static/js/scripts.js"></script>-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+</html>
