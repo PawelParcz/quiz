@@ -34,5 +34,6 @@ public class StartupRunner implements CommandLineRunner {
             log.info("Retrieved player: " + player);
         }
 
+
     }
 }

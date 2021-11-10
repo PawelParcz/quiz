@@ -49,7 +49,7 @@ public class FrontendController {
     }
 
     @PostMapping("/game")
-    public String postSelectForm(Model model, @ModelAttribute UserAnswer userAnswer) {
+    public String postSelectForm( @ModelAttribute UserAnswer userAnswer) {
         ongoingGameService.checkAnswerForCurrentQuestionAndUpdatePoints(userAnswer.getAnswer());
         boolean hasNextQuestion = ongoingGameService.proceedToNextQuestion();
         if (hasNextQuestion) {
@@ -67,6 +67,11 @@ public class FrontendController {
         model.addAttribute("maxPoints", ongoingGameService.getTotalQuestionNumber());
         return "summary";
     }
+    @GetMapping("/about")
+    public String getAbout(){
+        return "about";
+    }
+
 }
 
 

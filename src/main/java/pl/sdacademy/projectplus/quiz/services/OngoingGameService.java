@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 import pl.sdacademy.projectplus.quiz.database.json.QuestionsDto;
 import pl.sdacademy.projectplus.quiz.frontend.Difficulty;
 import pl.sdacademy.projectplus.quiz.frontend.GameOptions;
@@ -16,6 +17,7 @@ import java.util.Optional;
 //klasa przechowująca bierzący stan gry
 @Service
 @Log
+@SessionScope//ta adnotacja pozwala uruchomić gre równocześnie i nie zależnie w www
 public class OngoingGameService {
     private GameOptions gameOptions;
     private int currentQuestionIndex;
